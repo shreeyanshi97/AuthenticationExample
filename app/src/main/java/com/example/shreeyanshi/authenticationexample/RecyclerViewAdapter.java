@@ -13,19 +13,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shreeyanshi.authenticationexample.Model.Category;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
 
     Context mContext;
-    List<PetInfo> mData;
     Dialog myDialog;
+    List<Category> categories;
 
     //Constructor
 
-    public RecyclerViewAdapter(Context mContext, List<PetInfo> mData) {
+    public RecyclerViewAdapter(Context mContext, List<Category> categories) {
         this.mContext = mContext;
-        this.mData = mData;
+        this.categories=categories;
     }
 
     @NonNull
@@ -49,12 +52,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         //to set the details in the fragment of browsing pets
 
-        holder.image.setImageResource(mData.get(position).getImage());
-        holder.category.setText(mData.get(position).getCategory());
-        holder.breed.setText(mData.get(position).getBreed());
-        holder.weight.setText(mData.get(position).getWeight());
-        holder.age.setText(mData.get(position).getAge());
-        holder.price.setText(mData.get(position).getPrice());
+        Picasso
+                .with(mContext)
+                .load(categories.get(position).getImage())
+                .centerCrop()
+                .into(holder.image);
+        //holder.image.setImageResource(categories.get(position).getImage());
+        holder.category.setText(categories.get(position).getName());
+        holder.breed.setText("test");
+        holder.weight.setText("test");
+        holder.age.setText("test");
+        holder.price.setText("test");
 
         //setting the new dialog for click items
 
@@ -63,7 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         //setting the click listener
 
-        holder.petListItem.setOnClickListener(new View.OnClickListener() {
+     /*   holder.petListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -96,12 +104,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 myDialog.show();
             }
         });
-
+*/
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return categories.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

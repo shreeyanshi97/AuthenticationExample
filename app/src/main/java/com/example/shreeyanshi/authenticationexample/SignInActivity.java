@@ -46,6 +46,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
                 progressDialog.setTitle("Processing...");
+                progressDialog.setMessage("Signing you in .... ");
                 progressDialog.show();
 
                 table_user.addValueEventListener(new ValueEventListener() {
